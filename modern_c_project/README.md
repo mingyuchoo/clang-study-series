@@ -18,7 +18,7 @@ $ sudo apt install -y ninja-build bear valgrind cppcheck
 ```bash
 $ sudo dnf groupinstall "Development Tools" "Development Libraries"
 $ sudo dnf install clang llvm llvm-devel lldb clang-tools-extra
-$ sudo dnf cmake
+$ sudo dnf install cmake
 $ sudo dnf install criterion criterion-devel
 $ sudo dnf install bear ninja valgrind
 ```
@@ -39,7 +39,7 @@ $ clang-tidy src/*.c -- Iinclude -std=c23
 
 ```bash
 $ cd modern_c_project
-$ make build && cd build
+$ mkdir build && cd build
 $ cmake ..
 $ make
 $ ./modern_c
