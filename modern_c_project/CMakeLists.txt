@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 3.20)
+
+# Clang 설정 (project() 호출 전에 설정해야 적용됨)
+set(CMAKE_C_COMPILER clang)
+
 project(ModernCProject C)
 
-# Clang 설정
-set(CMAKE_C_COMPILER clang)
 set(CMAKE_C_STANDARD 23)
 set(CMAKE_C_FLAGS "-Wall -Wextra -Wpedantic -Werror -O2")
 

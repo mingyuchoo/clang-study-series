@@ -1,8 +1,29 @@
 # Modern C Project
 
-## Prerequsite
+C23 표준과 Clang 컴파일러를 사용하는 모던 C 프로젝트 템플릿입니다.
 
-## Ubuntu Linux
+## 프로젝트 구조
+
+```
+modern_c_project/
+├── CMakeLists.txt          # CMake 빌드 설정
+├── .clang-format           # 코드 포맷 설정 (LLVM 기반)
+├── .clang-tidy             # 정적 분석 설정
+├── include/
+│   ├── math_utils.h        # 수학 유틸리티 헤더
+│   └── string_utils.h      # 문자열 유틸리티 헤더
+├── src/
+│   ├── main.c              # 메인 엔트리포인트
+│   ├── math_utils.c        # add, sub, mul 함수
+│   └── string_utils.c      # str_len, str_eq 함수
+└── tests/
+    ├── test_math.c          # 수학 유틸리티 테스트 (Criterion)
+    └── test_string.c        # 문자열 유틸리티 테스트 (Criterion)
+```
+
+## 사전 요구사항
+
+### Ubuntu Linux
 
 ```bash
 $ sudo apt update
@@ -23,47 +44,47 @@ $ sudo dnf install criterion criterion-devel
 $ sudo dnf install bear ninja valgrind
 ```
 
-## Code Format
+## 빌드
 
 ```bash
-$ clang-format -i src/*.c include/*.h test/*.c
-```
-
-## Static Analysis
-
-```bash
-$ clang-tidy src/*.c -- Iinclude -std=c23
-```
-
-## Build
-
-```bash
-$ cd modern_c_project
 $ mkdir build && cd build
 $ cmake ..
 $ make
-$ ./modern_c
-$ ./run_tests
 ```
 
-or
+`scan-build`를 사용한 정적 분석 빌드:
 
 ```bash
-scan-build cmake --build .
+$ cd build
+$ scan-build cmake --build .
 ```
 
-## Run
+## 실행
 
 ```bash
-$ ./modern_c
+$ ./build/modern_c
 Add: 7
 String equal: 1
 ```
 
-## Test
+## 테스트
+
+[Criterion](https://github.com/Snaipe/Criterion) 프레임워크를 사용합니다.
 
 ```bash
-$ ./run_tests
+$ ./build/run_tests
 [====] Running 4 tests
 [====] Synthesis: Tested: 4 | Passing: 4 | Failing: 0 | Crashed: 0
+```
+
+## 코드 포맷
+
+```bash
+$ clang-format -i src/*.c include/*.h tests/*.c
+```
+
+## 정적 분석
+
+```bash
+$ clang-tidy src/*.c -- -Iinclude -std=c23
 ```
